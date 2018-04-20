@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .wrap {
+            width: 330px;
+            height: 30px;
+            margin: 100px auto 0;
+            padding-left: 10px;
+            background-image: url(imgs/bg.jpg);
+        }
+
+        .wrap li{
+            background-image: url(imgs/libg.jpg);
+        }
+
+        .wrap > ul > li {
+            float: left;
+            margin-right: 10px;
+            position: relative;
+        }
+
+        .wrap a {
+            display: block;
+            height: 30px;
+            width: 100px;
+            text-decoration: none;
+            color: #000;
+            line-height: 30px;
+            text-align: center;
+        }
+
+        .wrap li ul {
+            position: absolute;
+            top: 30px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <ul>
+        <li>
+            <a href="javascript:void(0);">一级菜单1</a>
+            <ul class="ul">
+                <li><a href="javascript:void(0);">二级菜单11</a></li>
+                <li><a href="javascript:void(0);">二级菜单12</a></li>
+                <li><a href="javascript:void(0);">二级菜单13</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0);">一级菜单2</a>
+            <ul>
+                <li><a href="javascript:void(0);">二级菜单21</a></li>
+                <li><a href="javascript:void(0);">二级菜单22</a></li>
+                <li><a href="javascript:void(0);">二级菜单23</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:void(0);">一级菜单3</a>
+            <ul>
+                <li><a href="javascript:void(0);">二级菜单31</a></li>
+                <li><a href="javascript:void(0);">二级菜单32</a></li>
+                <li><a href="javascript:void(0);">二级菜单33</a></li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<script type="text/javascript" src="../../jQuery/jquery-1.12.4.js"></script>
+<script type="text/javascript">
+    $(function(){
+
+        // 需求：鼠标移到对应的li里面 让当前li对应的ul下拉列表显示出来
+
+        // 套路：批量给元素注册事件，找到其中的逻辑规律 从当前出发去是实现这个效果
+
+        var $li = $('.wrap>ul>li');
+
+        // 注册事件 （批量绑定）
+        $li.mouseenter(function(){
+           // console.log('鼠标进入了')
+           // this 是一个DOM对象 需要转换成JQ对象
+           // children 方法 获取对应元素所有的子元素
+           // 参数：selector  选择器
+           // slideDown() 让元素滑下来
+           console.log($(this));
+           $(this).children('ul').stop().slideDown();
+        })
+        $li.mouseleave(function(){
+            // console.log('鼠标离开了')
+            $(this).children('ul').stop().slideUp();
+        })
+    })
+
+</script>
+</body>
+</html>
